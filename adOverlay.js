@@ -7,9 +7,9 @@
 //   const ads = createAdOverlay(document.body);
 //   ads.open("visit-lothing", bannerEl);  // bannerEl enables flip animation
 
-import { ADS } from "../BugmanAds/ads-data.js";
+import { ADS } from "./BugmanAds/ads-data.js";
 
-const AD_IMAGE_PATH = new URL("../BugmanAds/images/", import.meta.url).href;
+const AD_IMAGE_PATH = new URL("./BugmanAds/images/", import.meta.url).href;
 
 export function createAdOverlay(containerEl) {
 
