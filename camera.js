@@ -7,6 +7,7 @@ export function createViewBoxCamera(svg) {
   let listeners = [];
 
   let _rafPending = false;
+  let _zoomLocked = false;
 
   function emitChange() {
     if (_rafPending) return;
@@ -98,6 +99,7 @@ export function createViewBoxCamera(svg) {
     // --- wheel zoom ---
     svg.addEventListener("wheel", (e) => {
       e.preventDefault();
+      if (_zoomLocked) return;
 
       if (!view) view = getViewBox();
 
@@ -162,6 +164,8 @@ export function createViewBoxCamera(svg) {
         last = { x: t.clientX, y: t.clientY };
       }
 
+      if (_zoomLocked) touchMode = "pan"; // degrade pinch to pan while locked
+
       if (touchMode === "pinch" && e.touches.length === 2) {
         const dx = e.touches[1].clientX - e.touches[0].clientX;
         const dy = e.touches[1].clientY - e.touches[0].clientY;
@@ -200,10 +204,15 @@ export function createViewBoxCamera(svg) {
     listeners.push(fn);
   }
 
+  function lockZoom()   { _zoomLocked = true; }
+  function unlockZoom() { _zoomLocked = false; }
+
   return {
     getViewBox,
     setViewBox,
     animateTo,
-    onChange
+    onChange,
+    lockZoom,
+    unlockZoom,
   };
 }

@@ -295,7 +295,15 @@ body {
   content: "○ ";
 }
 
-/* ── Title watermark ────────────────────────────────────────────────────────── */
+/* ── Session playing state — hide everything except the stop button ─────────── */
+#view-panel.session-playing .view-section-label,
+#view-panel.session-playing #session-list,
+#view-panel.session-playing .view-divider,
+#view-panel.session-playing #layer-toggles {
+  display: none;
+}
+
+/* Title watermark ────────────────────────────────────────────────────────── */
 #map-title .voyage {
   font-size: 13px;
   letter-spacing: 0.18em;

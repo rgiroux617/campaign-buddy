@@ -332,7 +332,18 @@ const HEX_COLOR_OPACITY = {
     // ── Session recap buttons ────────────────────────────────────────────────
     const sessionList    = document.getElementById('session-list');
     const sessionStopBtn = document.getElementById('session-stop-btn');
+    const viewPanel      = document.getElementById('view-panel');
     let _activeSessionBtn = null;
+
+    function _setSessionPlaying(playing) {
+      if (playing) {
+        viewPanel.classList.add('session-playing');
+        camera.lockZoom();
+      } else {
+        viewPanel.classList.remove('session-playing');
+        camera.unlockZoom();
+      }
+    }
     const _audioPlayer = createAudioPlayer();
 
     // Pre-fetch all session audio files now, while the app is loading and the
@@ -354,6 +365,7 @@ const HEX_COLOR_OPACITY = {
         _activeSessionBtn = null;
       }
       sessionStopBtn.hidden = true;
+      _setSessionPlaying(false);
     }
 
     for (const session of (sessions ?? [])) {
@@ -366,6 +378,7 @@ const HEX_COLOR_OPACITY = {
         _activeSessionBtn = btn;
         btn.classList.add('active');
         sessionStopBtn.hidden = false;
+        _setSessionPlaying(true);
 
         // Start audio immediately (iOS requires play() inside a direct user gesture)
         if (session.audio) {
@@ -378,6 +391,7 @@ const HEX_COLOR_OPACITY = {
         if (_activeSessionBtn === btn) {
           _activeSessionBtn = null;
           sessionStopBtn.hidden = true;
+          _setSessionPlaying(false);
         }
       });
       sessionList.appendChild(btn);
