@@ -78,14 +78,6 @@ body {
   z-index: 100;
 }
 
-/* Session playing — hide all controls except stop button */
-#view-panel.session-playing .view-section-label,
-#view-panel.session-playing #session-list,
-#view-panel.session-playing .view-divider,
-#view-panel.session-playing #layer-toggles {
-  display: none;
-}
-
 /* Title watermark — top-left corner of the map */
 #map-title {
   position: fixed;
@@ -197,4 +189,201 @@ body {
 }
 
 /* ── View panel: section labels ─────────────────────────────────────────────── */
-.
+.view-section-label {
+  font-family: "Cormorant", serif;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.28);
+  margin: 4px 2px 5px;
+  user-select: none;
+}
+
+.view-divider {
+  border: none;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  margin: 7px 0;
+}
+
+/* ── Session recap buttons ──────────────────────────────────────────────────── */
+.session-recap-btn {
+  display: block;
+  width: 100%;
+  font-family: "Cormorant", serif;
+  font-size: 14px;
+  letter-spacing: 0.06em;
+  color: rgba(255,255,255,0.65);
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 5px;
+  padding: 4px 10px;
+  margin-bottom: 4px;
+  text-align: left;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+
+.session-recap-btn:hover {
+  color: rgba(255,255,255,0.9);
+  border-color: rgba(255,255,255,0.28);
+  background: rgba(255,255,255,0.05);
+}
+
+.session-recap-btn.active {
+  color: #e8c840;
+  border-color: #e8c840;
+  background: rgba(232,200,64,0.08);
+}
+
+/* Stop button */
+.session-stop-btn {
+  display: block;
+  width: 100%;
+  font-family: "Cormorant", serif;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(220,80,60,0.8);
+  background: transparent;
+  border: 1px solid rgba(220,80,60,0.35);
+  border-radius: 5px;
+  padding: 3px 10px;
+  margin-top: 2px;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.session-stop-btn:hover {
+  color: rgba(220,80,60,1);
+  border-color: rgba(220,80,60,0.7);
+}
+
+/* ── Layer toggles ──────────────────────────────────────────────────────────── */
+.layer-toggle-btn {
+  display: block;
+  width: 100%;
+  font-family: "Cormorant", serif;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  color: rgba(255,255,255,0.55);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  padding: 3px 10px;
+  margin-bottom: 3px;
+  text-align: left;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.layer-toggle-btn::before {
+  content: "● ";
+  font-size: 9px;
+  opacity: 0.7;
+}
+
+.layer-toggle-btn:hover {
+  color: rgba(255,255,255,0.85);
+  border-color: rgba(255,255,255,0.15);
+}
+
+.layer-toggle-btn.off {
+  color: rgba(255,255,255,0.25);
+}
+
+.layer-toggle-btn.off::before {
+  content: "○ ";
+}
+
+/* Session playing — hide all controls except stop button */
+#view-panel.session-playing .view-section-label,
+#view-panel.session-playing #session-list,
+#view-panel.session-playing .view-divider,
+#view-panel.session-playing #layer-toggles {
+  display: none;
+}
+
+/* ── Title watermark ────────────────────────────────────────────────────────── */
+#map-title .voyage {
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.35);
+  font-family: "Cormorant", serif;
+}
+
+#map-title .ship {
+  font-family: "IM Fell English SC", serif;
+  font-size: 32px;
+  color: rgba(0, 0, 0, 0.7);
+  line-height: 1.1;
+  margin-top: 2px;
+}
+</style>
+</head>
+
+<body>
+  <div id="app">
+
+    <!-- Full-screen map -->
+    <div id="wrap">
+      <svg id="grid"></svg>
+    </div>
+
+    <!-- Watermark title (top-left) -->
+    <div id="map-title">
+      <div class="voyage">A Journey of</div>
+      <div class="ship">The Implication</div>
+    </div>
+
+    <!-- Main toolbar (top-right) — tabbed Edit / View panels -->
+    <div id="main-toolbar">
+
+      <!-- Tab switcher -->
+      <div class="toolbar-tabs">
+        <button class="toolbar-tab active" data-panel="view">View</button>
+        <button class="toolbar-tab" data-panel="edit">Edit</button>
+      </div>
+
+      <!-- VIEW PANEL -->
+      <div class="toolbar-panel" id="view-panel">
+
+        <div class="view-section-label">Sessions</div>
+        <!-- Session recap buttons are injected here by app.js -->
+        <div id="session-list"></div>
+        <button class="session-stop-btn" id="session-stop-btn" hidden>■ Stop</button>
+
+        <hr class="view-divider">
+
+        <div class="view-section-label">Layers</div>
+        <!-- Layer toggles are injected here by app.js -->
+        <div id="layer-toggles"></div>
+
+      </div>
+
+      <!-- EDIT PANEL -->
+      <div class="toolbar-panel" id="edit-panel" hidden>
+        <div class="draw-buttons">
+          <button class="draw-btn" data-type="river">River</button>
+          <button class="draw-btn" data-type="road">Road</button>
+          <button class="draw-btn" data-type="misc">Misc</button>
+          <button class="draw-btn" data-type="ship">Ship Path</button>
+          <button class="draw-btn" data-type="land">Land Path</button>
+          <button class="draw-btn" data-type="water">Water FX</button>
+        </div>
+        <div id="draw-status"></div>
+      </div>
+
+    </div>
+
+    <!-- Story controls will live here (future) -->
+    <div id="ui-bar"></div>
+
+    <!-- Card overlay is created and injected by cardOverlay.js -->
+
+  </div>
+
+  <!-- All JS is now modular. app.js imports everything else. -->
+  <script type="module" src="app.js"></script>
+</body>
+</html>
