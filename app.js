@@ -26,7 +26,7 @@ import { createLineDrawTool }           from "./lineDrawTool.js";
 import { createShipPathDrawTool }       from "./shipPathDrawTool.js";
 import { createLandPathDrawTool }       from "./landPathDrawTool.js";
 import { createLandMovement }           from "./landMovement.js";
-import { createAdOverlay }              from "./adOverlay.js";
+// import { createAdOverlay }              from "./adOverlay.js";  // disabled
 import { renderFogLayer }               from "./fogLayer.js";
 import { renderShipLayer }              from "./shipLayer.js";
 import { createShipPanel }              from "./shipPanel.js";
@@ -301,8 +301,8 @@ const HEX_COLOR_OPACITY = {
     }));
 
     // 6. Set up the card overlay
-    // 6. Set up the card overlay
-    const adOverlay = createAdOverlay(document.body);
+    // adOverlay disabled — stub keeps cardOverlay working without ad popups
+    const adOverlay = { open: () => {}, close: () => {} };
     const card = createCardOverlay(document.body, adOverlay);
 
     // Expose app objects for console testing and journey callbacks
