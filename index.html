@@ -1,0 +1,381 @@
+<!-- Map Buddy — Viewer Edition  v2026-03-26 -->
+<!-- What changed from the authoring version:
+     - Removed: #panel (color picker, notes, import/export, dungeon buttons)
+     - Removed: all panel CSS and panel JS
+     - Changed: #app is now full-width (no right column)
+     - Added:   #ui-bar placeholder at bottom for future story controls
+     - Added:   <script type="module" src="app.js"> replaces the inline script
+     - Card overlay is created programmatically by cardOverlay.js
+-->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="apple-touch-icon" href="iphoneIcon.png">
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&family=Cormorant:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+
+<title>A Journey of The Implication</title>
+
+<style>
+/* ── Reset & base ───────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  height: 100vh;
+  overflow: hidden;           /* map fills the viewport, no page scroll */
+  font-family: "Cormorant", serif;
+  background: #0a151d;        /* deep water fallback while image loads */
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cline x1='2' y1='2' x2='22' y2='22' stroke='%23cc2200' stroke-width='2.5' stroke-linecap='round'/%3E%3Cline x1='22' y1='2' x2='2' y2='22' stroke='%23cc2200' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E") 12 12, crosshair;
+}
+
+/* ── Full-screen map layout ─────────────────────────────────────────────────── */
+#app {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  background-image: url("WaterBackground.jpeg");
+  background-size: cover;        /* pre-JS fallback only — canvas takes over on load */
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* The SVG grid sits inside a padding wrapper.
+   position:relative + z-index:1 ensures the SVG stacks above the
+   waterLayer canvas (which is position:absolute; z-index:0). */
+#wrap {
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+#grid {
+  display: block;
+  border-radius: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* ── UI bar ─────────────────────────────────────────────────────────────────── */
+#ui-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 24px;
+  background: none;
+  pointer-events: none;
+  z-index: 100;
+}
+
+/* Title watermark — top-left corner of the map */
+#map-title {
+  position: fixed;
+  top: 20px;
+  left: 28px;
+  pointer-events: none;
+  user-select: none;
+  z-index: 50;
+}
+
+/* ── Main toolbar — top-right corner ────────────────────────────────────────── */
+#main-toolbar {
+  position: fixed;
+  top: 20px;
+  right: 24px;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  min-width: 210px;
+}
+
+/* ── Tab row ────────────────────────────────────────────────────────────────── */
+.toolbar-tabs {
+  display: flex;
+  background: rgba(5, 12, 18, 0.80);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  border-radius: 8px 8px 0 0;
+  overflow: hidden;
+}
+
+.toolbar-tab {
+  flex: 1;
+  font-family: "Cormorant", serif;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.38);
+  background: transparent;
+  border: none;
+  padding: 6px 0;
+  cursor: pointer;
+  transition: color 0.15s, background 0.15s;
+}
+
+.toolbar-tab:hover {
+  color: rgba(255,255,255,0.7);
+}
+
+.toolbar-tab.active {
+  color: rgba(255,255,255,0.9);
+  background: rgba(255,255,255,0.07);
+}
+
+/* ── Panel container (shared by both panels) ────────────────────────────────── */
+.toolbar-panel {
+  background: rgba(5, 12, 18, 0.80);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  padding: 8px 9px;
+  backdrop-filter: blur(6px);
+}
+
+/* ── Edit panel: draw buttons ───────────────────────────────────────────────── */
+.draw-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.draw-btn {
+  font-family: "Cormorant", serif;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.55);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  padding: 3px 10px;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.draw-btn:hover {
+  color: rgba(255,255,255,0.9);
+  border-color: rgba(255,255,255,0.2);
+}
+
+.draw-btn.active[data-type="river"] { color: #5ab4d6; border-color: #5ab4d6; }
+.draw-btn.active[data-type="road"]  { color: #c4a46b; border-color: #c4a46b; }
+.draw-btn.active[data-type="misc"]  { color: #a06898; border-color: #a06898; }
+.draw-btn.active[data-type="water"] { color: #5ab4d6; border-color: #5ab4d6; }
+.draw-btn.active[data-type="ship"]  { color: #e8c840; border-color: #e8c840; }
+.draw-btn.active[data-type="land"]  { color: #c8f0a0; border-color: #c8f0a0; }
+
+#draw-status {
+  font-family: "Cormorant", serif;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: rgba(255,255,255,0.55);
+  text-align: right;
+  max-width: 360px;
+  min-height: 1em;
+  margin-top: 5px;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ── View panel: section labels ─────────────────────────────────────────────── */
+.view-section-label {
+  font-family: "Cormorant", serif;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.28);
+  margin: 4px 2px 5px;
+  user-select: none;
+}
+
+.view-divider {
+  border: none;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  margin: 7px 0;
+}
+
+/* ── Session recap buttons ──────────────────────────────────────────────────── */
+.session-recap-btn {
+  display: block;
+  width: 100%;
+  font-family: "Cormorant", serif;
+  font-size: 14px;
+  letter-spacing: 0.06em;
+  color: rgba(255,255,255,0.65);
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 5px;
+  padding: 4px 10px;
+  margin-bottom: 4px;
+  text-align: left;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+
+.session-recap-btn:hover {
+  color: rgba(255,255,255,0.9);
+  border-color: rgba(255,255,255,0.28);
+  background: rgba(255,255,255,0.05);
+}
+
+.session-recap-btn.active {
+  color: #e8c840;
+  border-color: #e8c840;
+  background: rgba(232,200,64,0.08);
+}
+
+/* Stop button */
+.session-stop-btn {
+  display: block;
+  width: 100%;
+  font-family: "Cormorant", serif;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(220,80,60,0.8);
+  background: transparent;
+  border: 1px solid rgba(220,80,60,0.35);
+  border-radius: 5px;
+  padding: 3px 10px;
+  margin-top: 2px;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.session-stop-btn:hover {
+  color: rgba(220,80,60,1);
+  border-color: rgba(220,80,60,0.7);
+}
+
+/* ── Layer toggles ──────────────────────────────────────────────────────────── */
+.layer-toggle-btn {
+  display: block;
+  width: 100%;
+  font-family: "Cormorant", serif;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  color: rgba(255,255,255,0.55);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  padding: 3px 10px;
+  margin-bottom: 3px;
+  text-align: left;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.layer-toggle-btn::before {
+  content: "● ";
+  font-size: 9px;
+  opacity: 0.7;
+}
+
+.layer-toggle-btn:hover {
+  color: rgba(255,255,255,0.85);
+  border-color: rgba(255,255,255,0.15);
+}
+
+.layer-toggle-btn.off {
+  color: rgba(255,255,255,0.25);
+}
+
+.layer-toggle-btn.off::before {
+  content: "○ ";
+}
+
+/* ── Title watermark ────────────────────────────────────────────────────────── */
+#map-title .voyage {
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.35);
+  font-family: "Cormorant", serif;
+}
+
+#map-title .ship {
+  font-family: "IM Fell English SC", serif;
+  font-size: 32px;
+  color: rgba(0, 0, 0, 0.7);
+  line-height: 1.1;
+  margin-top: 2px;
+}
+</style>
+</head>
+
+<body>
+  <div id="app">
+
+    <!-- Full-screen map -->
+    <div id="wrap">
+      <svg id="grid"></svg>
+    </div>
+
+    <!-- Watermark title (top-left) -->
+    <div id="map-title">
+      <div class="voyage">A Journey of</div>
+      <div class="ship">The Implication</div>
+    </div>
+
+    <!-- Main toolbar (top-right) — tabbed Edit / View panels -->
+    <div id="main-toolbar">
+
+      <!-- Tab switcher -->
+      <div class="toolbar-tabs">
+        <button class="toolbar-tab active" data-panel="view">View</button>
+        <button class="toolbar-tab" data-panel="edit">Edit</button>
+      </div>
+
+      <!-- VIEW PANEL -->
+      <div class="toolbar-panel" id="view-panel">
+
+        <div class="view-section-label">Sessions</div>
+        <!-- Session recap buttons are injected here by app.js -->
+        <div id="session-list"></div>
+        <button class="session-stop-btn" id="session-stop-btn" hidden>■ Stop</button>
+
+        <hr class="view-divider">
+
+        <div class="view-section-label">Layers</div>
+        <!-- Layer toggles are injected here by app.js -->
+        <div id="layer-toggles"></div>
+
+      </div>
+
+      <!-- EDIT PANEL -->
+      <div class="toolbar-panel" id="edit-panel" hidden>
+        <div class="draw-buttons">
+          <button class="draw-btn" data-type="river">River</button>
+          <button class="draw-btn" data-type="road">Road</button>
+          <button class="draw-btn" data-type="misc">Misc</button>
+          <button class="draw-btn" data-type="ship">Ship Path</button>
+          <button class="draw-btn" data-type="land">Land Path</button>
+          <button class="draw-btn" data-type="water">Water FX</button>
+        </div>
+        <div id="draw-status"></div>
+      </div>
+
+    </div>
+
+    <!-- Story controls will live here (future) -->
+    <div id="ui-bar"></div>
+
+    <!-- Card overlay is created and injected by cardOverlay.js -->
+
+  </div>
+
+  <!-- All JS is now modular. app.js imports everything else. -->
+  <script type="module" src="app.js"></script>
+</body>
+</html>

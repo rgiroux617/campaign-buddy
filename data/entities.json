@@ -1,0 +1,435 @@
+[
+  {
+    "id": "implication",
+    "hex": "13,02",
+    "name": "The Implication",
+    "icon": "images/implication.svg",
+    "offset": {
+      "x": -50,
+      "y": 10
+    },
+    "card": {
+      "subtitle": "Longship",
+      "body": "Home and transport for the crew. A reliable vessel with a complicated past (it used to be someone else's boat).",
+      "quote": null,
+      "npcs": [],
+      "tags": [
+        "vessel",
+        "crew"
+      ],
+      "adId": null
+    }
+  },
+  {
+    "id": "lothing",
+    "hex": "21,03",
+    "name": "Lothing",
+    "icon": "images/lothing.svg",
+    "offset": {
+      "x": 50,
+      "y": -40
+    },
+    "card": {
+      "subtitle": "A shitty little port",
+      "body": "50 people, a belltower and some cuttlefish.  If you're starving, it's better than nothing.",
+      "quote": "\"Lothing welcomes you! ...please help, they've got us locked in this stupid tower.\" — Tourism Board",
+      "npcs": [],
+      "tags": [
+        "settlement",
+        "port",
+        "trade"
+      ],
+      "adId": "visit-lothing"
+    }
+  },
+  {
+    "id": "worm_dungeon",
+    "hex": "29,08",
+    "name": "Worm Dungeon",
+    "icon": "images/worm_dungeon.svg",
+    "offset": {
+      "x": 50,
+      "y": 50
+    },
+    "card": {
+      "subtitle": "Dungeon",
+      "body": "A dungeon full of dead people (and 1 poor undead fellow) seemingly imprisoned there as punishment. 4 brilliant trees feeding a giant worm and the corpse of a queen were the highlights",
+      "quote": "carved in a wall - \"Thou breaker of oaths are condemned to silence and wrestless sleep eternal\"",
+      "npcs": [],
+      "tags": [
+        "dungeon",
+        "worm",
+        "brilliant tree"
+      ],
+      "adId": "bugman-wards"
+    }
+  },
+  {
+    "id": "sea_vultures",
+    "hex": "20,03",
+    "name": "Sea Vultures",
+    "icon": "images/sea_vultures.svg",
+    "offset": {
+      "x": -45,
+      "y": -25
+    },
+    "card": {
+      "subtitle": "Wackadoos",
+      "body": "These jerkoffs attacked us out of nowhere and when it looked like we might be able to stop them, surrendered and demanded they be administered to per the Geneva Conventions.",
+      "quote": null,
+      "npcs": [],
+      "tags": [
+        "combat",
+        "sea",
+        "crackheads"
+      ],
+      "adId": null
+    }
+  },
+  {
+    "id": "wyvern",
+    "hex": "18,04",
+    "name": "Wyvern",
+    "icon": "images/wyvern.svg",
+    "card": {
+      "subtitle": "a hungry, sadistic beast",
+      "body": "After doing us a favor and chewing on a sea vulture, the beast annoying decided to track and attack us.  Well fuck him!  he dead!",
+      "quote": null,
+      "npcs": [],
+      "tags": [
+        "combat",
+        "beast",
+        "ingvar"
+      ],
+      "adId": null
+    }
+  },
+  {
+    "id": "bird_nest",
+    "hex": "25,10",
+    "name": "Great Bird Nest",
+    "icon": "images/great_bird.svg",
+    "card": {
+      "subtitle": "Point of Interest",
+      "body": "Apparently a giant (and I mean giant) bird lives here as per the empty nest we encountered made out of full sized branches or even trees.  Only Rabiesman had the guts to want to challenge the bird, but was overruled.",
+      "quote": null,
+      "npcs": [],
+      "tags": [
+        "wilderness"
+      ],
+      "adId": null
+    }
+  },
+  {
+    "id": "steele_monolith",
+    "hex": "28,08",
+    "name": "Monolith",
+    "icon": "images/steele.svg",
+    "card": {
+      "subtitle": "Ancient Landmark",
+      "body": "A giant pillar seen from the sea. Below it sits a stele with indecipherable words",
+      "quote": "ed-we ain't coming back here",
+      "npcs": [],
+      "tags": [
+        "stele",
+        "pillar"
+      ],
+      "adId": null
+    }
+  },
+  {
+    "id": "runes",
+    "hex": "25,11",
+    "name": "Runes",
+    "icon": "images/runes.svg",
+    "offset": {
+      "x": -50,
+      "y": 20
+    },
+    "card": {
+      "subtitle": "Ancient Site",
+      "body": "Some runes sitting atop a grassy hill overlooking the sea.",
+      "quote": "\"Take up your blade and remove 2 crowns in 1 strike from a King atop this mound – Our God Knell, our God Knell\"",
+      "npcs": [],
+      "tags": [
+        "runes"
+      ],
+      "adId": null
+    }
+  },
+  {
+    "id": "cursed_island",
+    "hex": "21,05",
+    "name": "Cursed Island",
+    "icon": "images/cursed_island.svg",
+    "offset": {
+      "x": -10,
+      "y": 50
+    },
+    "card": {
+      "subtitle": "Cursed Location",
+      "body": "I guess it's cursed but what the hell does that even mean these days.  we're fuckin cursed, everyone's cursed living in this lovely area.",
+      "quote": null,
+      "npcs": [],
+      "tags": [
+        "cursed",
+        "danger"
+      ],
+      "adId": "bugman-wards"
+    }
+  },
+  {
+    "id": "monster_island",
+    "hex": "23,05",
+    "name": "Monster Island",
+    "icon": "images/godzilla.svg",
+    "card": {
+      "subtitle": "Encounter Site",
+      "body": "the slack jaws in Lothing claimed a big monster lives here but they are also afraid to go 5 miles out to sea, so who knows.",
+      "quote": null,
+      "npcs": [],
+      "tags": [],
+      "adId": null
+    }
+  },
+  {
+    "id": "borg",
+    "hex": "30,04",
+    "name": "City of Borg",
+    "icon": "images/borg.svg",
+    "card": {
+      "subtitle": "City",
+      "body": "Another hallucination from captain Lonc before he walked naked out into the woods to be eaten by a Wyvern.",
+      "quote": null,
+      "npcs": [],
+      "tags": [
+        "settlement",
+        "city"
+      ],
+      "adId": null
+    }
+  },
+  {
+    "id": "klayhom",
+    "hex": "31,01",
+    "name": "Klayhom",
+    "icon": "images/klayhom.svg",
+    "card": {
+      "subtitle": "Settlement",
+      "body": "Captain Lonc claimed it was a small site to the east.  Fuck that guy.",
+      "quote": null,
+      "npcs": [],
+      "tags": [
+        "settlement"
+      ],
+      "adId": null
+    }
+  },
+  {
+    "id": "eaverness",
+    "hex": "13,03",
+    "name": "Eaverness",
+    "icon": "images/eaverness.svg",
+    "offset": {
+      "x": -50,
+      "y": -70
+    },
+    "card": {
+      "subtitle": "City",
+      "body": "This fuckin place.  The Warden Queen runs things from a fort at the top of the city, banded by ringe walls.  Guards with clipped ears patrol things, but you can get just about anything you want.  Even hirelings!",
+      "quote": null,
+      "npcs": [
+        {
+          "name": "Warden Queen",
+          "desc": "has underlings stationed at forts to the south."
+        }
+      ],
+      "tags": [
+        "map",
+        "witch",
+        "guards",
+        "heather",
+        "hirelings",
+        "fishing",
+        "whaling",
+        "city"
+      ],
+      "adId": null
+    }
+  },
+  {
+    "id": "miughland",
+    "hex": "20,02",
+    "name": "Miughland",
+    "icon": "images/sheep.svg",
+    "card": {
+      "subtitle": "Region",
+      "body": "Sheep Island.  The idiots in Lothing have an endless food source 5 miles from them and they don't even know it.",
+      "quote": null,
+      "npcs": [],
+      "tags": [
+        "sheep",
+        "sheep",
+        "more fuckin sheep"
+      ],
+      "adId": null
+    }
+  },
+  {
+    "id": "fort1",
+    "hex": "14,04",
+    "name": "Fort",
+    "icon": "images/fort.svg",
+        "offset": {
+          "x": 20,
+          "y": -50
+        },
+    "card": {
+      "subtitle": "Battlement",
+      "body": "It's a fort on a shitty map we probably got scammed on.",
+      "quote": null,
+      "npcs": [],
+      "tags": [
+        "wilderness"
+      ],
+      "adId": null
+    }
+  },
+  {
+    "id": "fort2",
+    "hex": "13,04",
+    "name": "Fort",
+    "icon": "images/fort.svg",
+    "card": {
+      "subtitle": "Battlement",
+      "body": "It's a fort on a shitty map we probably got scammed on.",
+      "quote": null,
+      "npcs": [],
+      "tags": [
+        "wilderness"
+      ],
+      "adId": null
+    }
+  },
+  {
+    "id": "fort3",
+    "hex": "11,04",
+    "name": "Fort",
+    "icon": "images/fort.svg",
+    "card": {
+      "subtitle": "military outpost",
+      "body": "It's a fort on a map. I think this one is run by a count.",
+      "quote": null,
+      "npcs": [],
+      "tags": [
+        "unexplored",
+        "Albann"
+      ],
+      "adId": null
+    }
+  },
+  {
+    "id": "village1",
+    "hex": "11,06",
+    "name": "Village",
+    "icon": "images/village.svg",
+    "offset": {
+      "x": -30,
+      "y": 45
+    },
+    "card": {
+      "subtitle": "map location",
+      "body": "Unexplored village. We ain't been here yet, quit asking.",
+      "quote": null,
+      "npcs": [],
+      "tags": [
+        "unexplored",
+        "village",
+        "Albann"
+      ],
+      "adId": null
+    }
+  },
+  {
+    "id": "village2",
+    "hex": "10,06",
+    "name": "Village",
+    "icon": "images/village.svg",
+    "offset": {
+      "x": -40,
+      "y": 40
+    },
+    "card": {
+      "subtitle": "map location",
+      "body": "Unexplored village. We ain't been here yet, quit asking.",
+      "quote": null,
+      "npcs": [],
+      "tags": [
+        "unexplored",
+        "village",
+        "Albann"
+      ],
+      "adId": null
+    }
+  },
+  {
+    "id": "albann2",
+    "hex": "09,05",
+    "name": "City",
+    "icon": "images/Albann_City_2.svg",
+    "card": {
+      "subtitle": "Region",
+      "body": "A city on a map we bought in Eaverness. Probably bullshit.",
+      "quote": null,
+      "npcs": [],
+      "tags": [
+        "unexplored",
+        "city",
+        "Albann"
+      ],
+      "adId": null
+    }
+  },
+  {
+    "id": "blackstathe",
+    "hex": "15,05",
+    "name": "The Black Stathe",
+    "icon": "images/forest.svg",
+    "offset": { "x": 0, "y": 0 },
+    "pointer": { "enabled": false },
+    "card": {
+      "subtitle": "Regional Forest",
+      "body": "The mighty Black Stathe - crowed about endlessly by the good people of Eaverness as \"scary\" and \"dark\".  It's just a bunch of trees and scares no true viking.",
+      "quote": null,
+      "npcs": [],
+      "tags": [
+        "unexplored",
+        "forest"
+      ],
+    "adId": null
+    }
+  },
+    {
+      "id": "pirates",
+      "hex": "16,02",
+      "name": "Pirates",
+      "icon": "images/caravel.svg",
+      "offset": {
+        "x": -20,
+        "y": -40
+      },
+      "card": {
+        "subtitle": "the normal kind",
+        "body": "a bunch of nice fellas who are laying low from some concern.  we traded them cuttlefish for a little info on the region.",
+        "quote": null,
+        "npcs": [],
+        "tags": [
+          "pirates",
+          "river",
+          "map",
+          "trade"
+        ],
+        "adId": null
+      }
+    }
+]

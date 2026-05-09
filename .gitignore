@@ -1,0 +1,20 @@
+# ── Photoshop source files ────────────────────────────────────────────────────
+*.psd
+
+# ── Development / authoring artifacts ────────────────────────────────────────
+path.xlsx
+audio/Session dialogue.docx
+
+# ── Old / backup data files ───────────────────────────────────────────────────
+data/campaign_default_old.json
+seeds/campaign_defaultold.json
+seeds/session_2_progress.json
+
+# ── Archive folders ───────────────────────────────────────────────────────────
+archive/
+data/archive/
+images/archive/
+
+# ── OS junk ───────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db

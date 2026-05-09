@@ -1,0 +1,222 @@
+[
+  {
+    "hex": "28,13",
+    "type": "sea"
+  },
+  {
+    "hex": "28,12",
+    "type": "sea"
+  },
+  {
+    "hex": "28,11",
+    "type": "sea"
+  },
+  {
+    "hex": "28,10",
+    "type": "sea"
+  },
+  {
+    "hex": "28,09",
+    "type": "sea"
+  },
+  {
+    "hex": "28,08",
+    "type": "land",
+    "waypoint": true,
+    "entityId": "steele_monolith",
+    "pauseMs": 2000,
+    "zoom": 300
+  },
+  {
+    "hex": "29,08",
+    "type": "land",
+    "waypoint": true,
+    "entityId": "worm_dungeon",
+    "pauseMs": 2500,
+    "zoom": 300
+  },
+  {
+    "hex": "28,08",
+    "type": "land"
+  },
+  {
+    "hex": "28,09",
+    "type": "sea"
+  },
+  {
+    "hex": "27,09",
+    "type": "sea"
+  },
+  {
+    "hex": "26,09",
+    "type": "land"
+  },
+  {
+    "hex": "25,09",
+    "type": "land"
+  },
+  {
+    "hex": "25,10",
+    "type": "land",
+    "waypoint": true,
+    "entityId": "bird_nest",
+    "pauseMs": 2000,
+    "zoom": 300
+  },
+  {
+    "hex": "26,11",
+    "type": "land"
+  },
+  {
+    "hex": "25,11",
+    "type": "land",
+    "waypoint": true,
+    "entityId": "runes",
+    "pauseMs": 2000,
+    "zoom": 300
+  },
+  {
+    "hex": "25,10",
+    "type": "land"
+  },
+  {
+    "hex": "25,09",
+    "type": "land"
+  },
+  {
+    "hex": "26,09",
+    "type": "land"
+  },
+  {
+    "hex": "27,09",
+    "type": "sea"
+  },
+  {
+    "hex": "27,08",
+    "type": "sea"
+  },
+  {
+    "hex": "26,08",
+    "type": "sea"
+  },
+  {
+    "hex": "26,07",
+    "type": "sea"
+  },
+  {
+    "hex": "26,06",
+    "type": "sea"
+  },
+  {
+    "hex": "26,05",
+    "type": "sea"
+  },
+  {
+    "hex": "26,04",
+    "type": "sea"
+  },
+  {
+    "hex": "26,03",
+    "type": "sea"
+  },
+  {
+    "hex": "26,02",
+    "type": "sea"
+  },
+  {
+    "hex": "26,01",
+    "type": "sea"
+  },
+  {
+    "hex": "25,01",
+    "type": "sea"
+  },
+  {
+    "hex": "24,02",
+    "type": "sea"
+  },
+  {
+    "hex": "23,02",
+    "type": "sea"
+  },
+  {
+    "hex": "22,03",
+    "type": "sea"
+  },
+  {
+    "hex": "21,03",
+    "type": "land",
+    "waypoint": true,
+    "entityId": "lothing",
+    "pauseMs": 2000,
+    "zoom": 300
+  },
+  {
+    "hex": "22,03",
+    "type": "sea"
+  },
+  {
+    "hex": "21,02",
+    "type": "sea"
+  },
+  {
+    "hex": "20,02",
+    "type": "land",
+    "waypoint": true,
+    "entityId": "miughland",
+    "pauseMs": 2000,
+    "zoom": 300
+  },
+  {
+    "hex": "21,02",
+    "type": "sea"
+  },
+  {
+    "hex": "20,03",
+    "type": "sea"
+  },
+  {
+    "hex": "19,03",
+    "type": "sea",
+    "waypoint": true,
+    "entityId": "implication",
+    "pauseMs": 3000,
+    "zoom": 250
+  },
+  {
+    "hex": "18,04",
+    "type": "land",
+    "waypoint": true,
+    "label": "Journey's End",
+    "pauseMs": 3000,
+    "zoom": 300
+  },
+  {
+    "hex": "18,03",
+    "type": "sea"
+  },
+  {
+    "hex": "17,02",
+    "type": "sea"
+  },
+  {
+    "hex": "16,02",
+    "type": "sea"
+  },
+  {
+    "hex": "15,01",
+    "type": "sea"
+  },
+  {
+    "hex": "14,02",
+    "type": "sea"
+  },
+  {
+    "hex": "13,02",
+    "type": "sea"
+  },
+  {
+    "hex": "13,03",
+    "type": "land"
+  }
+]
