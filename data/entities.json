@@ -376,7 +376,7 @@
     "id": "albann2",
     "hex": "09,05",
     "name": "City",
-    "icon": "images/Albann_City_2.svg",
+    "icon": "images/albann_city_2.svg",
     "card": {
       "subtitle": "Region",
       "body": "A city on a map we bought in Eaverness. Probably bullshit.",
