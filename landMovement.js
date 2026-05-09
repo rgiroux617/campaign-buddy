@@ -127,8 +127,7 @@ export function createLandMovement(helmetLayer, landData) {
         currentArcLen = Math.min(currentArcLen + speedUnitsPerMs * dt, toArcLen);
 
         const { x, y, headingDeg } = sampleSpline(spline, currentArcLen);
-        helmetLayer.setPosition(x, y);
-        helmetLayer.setHeading(headingDeg);
+        helmetLayer.setPose(x, y, headingDeg);
 
         if (currentArcLen < toArcLen) {
           requestAnimationFrame(step);

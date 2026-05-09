@@ -72,6 +72,13 @@ export async function createHelmetLayer(svg) {
     _applyTransform();
   }
 
+  function setPose(x, y, deg) {
+    _x = x;
+    _y = y;
+    _deg = deg;
+    _applyTransform();
+  }
+
   // Fade from transparent to fully opaque over ms milliseconds.
   function fadeIn(ms) {
     return new Promise(resolve => {
@@ -99,5 +106,5 @@ export async function createHelmetLayer(svg) {
   }
 
   // Expose group so app.js can manage z-order (insertBefore shipLayer).
-  return { group, setPosition, setHeading, fadeIn, fadeOut };
+  return { group, setPosition, setHeading, setPose, fadeIn, fadeOut };
 }

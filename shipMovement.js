@@ -111,8 +111,7 @@ export function createShipMovement(shipLayer, shipPathData, helmetLayer = null, 
         // Position and heading come directly from the spline — no separate
         // heading interpolation needed
         const { x, y, headingDeg } = sampleSpline(spline, currentArcLen);
-        shipLayer.setPosition(x, y);
-        shipLayer.setHeading(headingDeg);
+        shipLayer.setPose(x, y, headingDeg);
         _currentHeading = headingDeg;
 
         // Notify session player of current position (used for camera follow)

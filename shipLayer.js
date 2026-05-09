@@ -203,6 +203,13 @@ export async function renderShipLayer(svg, hex, centerFn) {
     _updateTransforms();
   }
 
+  function setPose(x, y, deg) {
+    _shipX = x;
+    _shipY = y;
+    _headingDeg = deg;
+    _updateTransforms();
+  }
+
   function setShadow(filter) {
     // Apply shadow only to above-water elements
     // Excludes: oars, ripples, boat_wake — at or below waterline
@@ -353,6 +360,7 @@ export async function renderShipLayer(svg, hex, centerFn) {
     setZoomLevel,
     setPosition,
     setHeading,
+    setPose,
     setShadow,
     setRotation,
     stopWake,
